@@ -37,7 +37,7 @@ function LandingPage() {
     const fetchReports = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:3001/reports/allreports');
+        const response = await axios.get('https://debugitbackend.onrender.com/reports/allreports');
         setAllReports(response.data);
         setLoading(false);
       } catch (error) {
@@ -137,23 +137,12 @@ function LandingPage() {
                           <Tag color={getStatusColor(report.status)}>
                             {report.status || 'Pending'}
                           </Tag>
-                          <Text type="secondary" style={{ display: 'block', marginTop: 8 }}>
-                            {report.created_at ? new Date(report.created_at).toLocaleDateString() : 'Date unavailable'}
-                          </Text>
                         </div>
                       }
                     >
                       <List.Item.Meta
                         avatar={<Avatar icon={<ExclamationCircleOutlined />} style={{ backgroundColor: '#1890ff' }} />}
                         title={<a href={`/report/${report.id}`}>{report.title}</a>}
-                        description={
-                          <Space>
-                            <UserOutlined />
-                            <Text type="secondary">
-                              Reported by {report.reporter_name || 'Anonymous'}
-                            </Text>
-                          </Space>
-                        }
                       />
                       <Paragraph
                         ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}

@@ -32,7 +32,7 @@ const Poll = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3001/poll/create', {
+      const response = await fetch('https://debugitbackend.onrender.com/poll/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

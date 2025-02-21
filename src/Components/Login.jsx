@@ -6,11 +6,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 function Login() {
     const navigate = useNavigate();
-    const { login } = useUser();
+    const { login,loginData } = useUser();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
+   
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);

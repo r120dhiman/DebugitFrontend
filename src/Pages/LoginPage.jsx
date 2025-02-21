@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Login from '../Components/Login';
 import { Layout, Typography, Button } from 'antd';
 
@@ -7,7 +6,6 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 function LoginPage() {
-  const navigate = useNavigate(); 
   return (
     <Layout className="min-h-[95vh] bg-[#f0f2f5]">
       <Content className="max-w-4xl mx-auto p-6 w-full">

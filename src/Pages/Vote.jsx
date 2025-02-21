@@ -52,8 +52,6 @@ const Vote = () => {
       if (!response.ok) {
         throw new Error('Failed to register vote');
       }
-
-      // Update vote count in real-time
       setAllPolls((prevPolls) =>
         prevPolls.map((poll) =>
           poll._id === pollId

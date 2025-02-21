@@ -7,35 +7,40 @@ function Profile() {
   const [UserPolls, setUserPolls] = useState([]);
   const [UserReports, setUserReports] = useState([]);
   const navigate = useNavigate();
-  const { loginData } = useUser();
-
+  const { loginData, isAuthenticated } = useUser();
+  
   useEffect(() => {
     if (!loginData) {
       navigate("/login");
       return;
     }
+    
     const userid = loginData.id;
     axios
-      .get("http://localhost:3001/reports/userreports", { params: { userid } })
+      .get("https://debugitbackend.onrender.com/reports/userreports", { 
+        params: { userid } 
+      })
       .then((response) => {
         setUserReports(response.data);
       })
       .catch((error) => console.error("Error fetching reports:", error));
+    
     axios
-      .get("http://localhost:3001/poll/userpolls", { params: { userid } })
+      .get("https://debugitbackend.onrender.com/poll/userpolls", { 
+        params: { userid }  
+      })
       .then((response) => {
         setUserPolls(response.data);
       })
       .catch((error) => console.error("Error fetching polls:", error));
-  }, []);
-
+  }, [loginData, navigate]);  
+  
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold">Welcome to Your Profile</h1>
       <div className="my-4 bg-gray-100 p-4 rounded shadow">
         <h2 className="text-xl font-semibold">Name</h2>
         <p className="text-lg">{loginData?.first_name} {loginData?.last_name}</p>
-
         <h3 className="text-xl font-semibold mt-2">Email</h3>
         <p className="text-lg">{loginData?.email}</p>
       </div>

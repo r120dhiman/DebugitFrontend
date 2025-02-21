@@ -1,174 +1,138 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../Api/Context.jsx";
 import { Layout, Menu, Button, Avatar } from "antd";
 import {
   UserOutlined,
-  LogoutOutlined,
   LoginOutlined,
   UserAddOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
-import gsap from "gsap";
-const Navbar = () => {
-  let tl = gsap.timeline();
-  useEffect(() => {
-    tl.fromTo(
-      ".navoption",
-      {
-        x: -10,
-        y: -20,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.2,
-      }
-    );
-  }, []);
-  const handlehover = (event) => {
-    gsap.to(event.currentTarget, {
-      borderBottomWidth: 2,
-      duration: 0.3,
-      borderBottomColor: "white",
-    });
-  };
-  const handleout = (event) => {
-    gsap.to(event.currentTarget, {
-      borderBottomWidth: 0,
-    });
-  };
-  const { loginData, logout } = useUser();
-  console.log(loginData);
-  const navigate = useNavigate();
-  const [current, setCurrent] = useState("home");
 
-  const handleMenuClick = (e) => {
-    setCurrent(e.key);
-  };
+const Navbar = () => {
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+  const { loginData, logout } = useUser();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate("/");
+    setMobileMenuVisible(false);
   };
 
   return (
-    <Layout.Header className=" p-0 sticky top-0 z-[1] w-full  h-20  bg-[#001529]">
-        <div className="flex justify-between items-center h-12 pt-2 ">
-          <div className="flex items-center w-full ">
-            <Link to="/">
-              <h1 className="text-white text-xl font-bold w-40 m-0">
-                Civic Portal
-              </h1>
-            </Link>
+    <Layout.Header className="p-0 sticky top-0 z-50 w-full bg-[#001529]">
+      <div className="flex justify-between items-center h-16 px-4">
+        {/* Logo */}
+        <Link to="/">
+          <h1 className="text-white text-xl font-bold m-0">Civic Portal</h1>
+        </Link>
 
-            <div className="flex w-full flex-row gap-20 h-full ">
-              <Link
-                to="/"
-                onMouseEnter={(e) => {
-                  handlehover(e);
-                }}
-                onMouseOut={(e) => {
-                  handleout(e);
-                }}
-                className={`navoption text-white h-fit px-3 `}
-              >
-                Home
-              </Link>
-              <Link to="/vote"  onMouseEnter={(e) => {
-                  handlehover(e);
-                }}
-                onMouseOut={(e) => {
-                  handleout(e);
-                }} className="navoption text-white px-3 ">
-                Vote
-              </Link>
-              {loginData && (
-                <>
-                  <Link
-                   onMouseEnter={(e) => {
-                    handlehover(e);
-                  }}
-                  onMouseOut={(e) => {
-                    handleout(e);
-                  }}
-                    to="/report"
-                    className="navoption text-white px-3 "
-                  >
-                    Report
-                  </Link>
-                  <Link
-                   onMouseEnter={(e) => {
-                    handlehover(e);
-                  }}
-                  onMouseOut={(e) => {
-                    handleout(e);
-                  }}
-                    to="/newpoll"
-                    className="navoption text-white px-3 "
-                  >
-                    Create Poll
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-          <div className="hidden md:flex items-center space-x-6">
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              selectedKeys={[current]}
-              onClick={handleMenuClick}
-              className="bg-none border-b-none flex items-center"
-            >
-              {loginData && (
-                <>
-                 <span onClick={handleLogout} className="navoption px-5 text-white text-lg">
-                    Logout
-                  </span>
-                </>
-              )}
-            </Menu>
-
-            {loginData ? (
-              <div className="flex items-center space-x-3">
-                <Link to="/profile" className="flex flex-row justify-center items-center gap-3">
-                <Avatar icon={<UserOutlined />} />
-                
-                  <span className="navoption text-white text-sm">
-                    {loginData.first_name || "User"}
-                  </span>
-                </Link>
-              </div>
-            ) : (
-              <>
-                <Button
-                  type="link"
-                  icon={<LoginOutlined />}
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </Button>
-                <Button
-                  type="primary"
-                  icon={<UserAddOutlined />}
-                  onClick={() => navigate("/signup")}
-                >
-                  Signup
-                </Button>
-              </>
-            )}
-          </div>
-          <div className="md:hidden">
-            <Button
-              type="text"
-              icon={<MenuOutlined className="text-white text-2xl" />}
-            />
-          </div>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-6">
+          <Link to="/" className="text-white px-3">Home</Link>
+          <Link to="/vote" className="text-white px-3">Give Your Opinion</Link>
+          {loginData && (
+            <>
+              <Link to="/report" className="text-white px-3">Report</Link>
+              <Link to="/newpoll" className="text-white px-3">Create Poll</Link>
+            </>
+          )}
         </div>
+
+        {/* Auth Buttons - Desktop */}
+        <div className="hidden md:flex items-center space-x-4">
+          {loginData ? (
+            <div className="flex items-center space-x-4">
+              <Link to="/profile" className="flex items-center space-x-2">
+                <Avatar icon={<UserOutlined />} />
+                <span className="text-white text-sm">
+                  {loginData.first_name || "User"}
+                </span>
+              </Link>
+              <Button 
+                type="text" 
+                className="filter invert text-white" 
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <>
+              <Button
+                type="link"
+                icon={<LoginOutlined />}
+                onClick={() => navigate("/login")}
+                className="text-white"
+              >
+                Login
+              </Button>
+              <Button
+                type="primary"
+                icon={<UserAddOutlined />}
+                onClick={() => navigate("/signup")}
+              >
+                Signup
+              </Button>
+            </>
+          )}
+        </div>
+
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden">
+          <Button
+            type="text"
+            icon={<MenuOutlined className= " filter invert text-white text-lg" />}
+            onClick={() => setMobileMenuVisible(!mobileMenuVisible)}
+            className="text-white"
+          />
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuVisible && (
+        <div className="md:hidden bg-[#001529] py-4 px-4 space-y-3">
+          <Link to="/" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Home</Link>
+          <Link to="/vote" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Give Your Opinion</Link>
+          
+          {loginData ? (
+            <>
+              <Link to="/report" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Report</Link>
+              <Link to="/newpoll" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Create Poll</Link>
+              <Link to="/profile" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Profile</Link>
+              <Button 
+                type="text" 
+                className="block text-white py-2 w-full text-left" 
+                onClick={handleLogout}
+                style={{color:'white'}}
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <div className="flex flex-col space-y-2 pt-2">
+              <Button
+                type="primary"
+                onClick={() => {
+                  navigate("/login");
+                  setMobileMenuVisible(false);
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/signup");
+                  setMobileMenuVisible(false);
+                }}
+              >
+                Signup
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
     </Layout.Header>
   );
 };
