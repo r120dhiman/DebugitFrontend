@@ -20,7 +20,7 @@ function Reportcard({ onSubmitSuccess }) {
 
         setIsSubmitting(true);
         try {
-            const response = await axios.post('https://debugitbackend.onrender.com/reports/newreport', {
+            const response = await axios.post('http://localhost:3001/reports/newreport', {
                 title: values.title,
                 description: values.description,
                 userid: loginData.id

@@ -1,82 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Row, Col, Typography, Space, Divider } from 'antd';
-import { 
-  GithubOutlined, 
-  TwitterOutlined, 
-  LinkedinOutlined, 
-  HeartOutlined,
-  MailOutlined
-} from '@ant-design/icons';
-
-const { Footer: AntFooter } = Layout;
-const { Text, Title } = Typography;
+import { GithubOutlined, TwitterOutlined, LinkedinOutlined, MailOutlined } from '@ant-design/icons';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
-    <AntFooter style={{ background: '#001529', padding: '24px 50px' }}>
-      <Row justify="space-between" align="middle">
-        <Col xs={24} md={8}>
-          <Title level={4} style={{ color: 'white', marginBottom: '12px' }}>
-            PollSystem
-          </Title>
-          <Text style={{ color: '#9CA3AF' }}>
-            Creating and managing polls made simple and efficient.
-          </Text>
-        </Col>
-        
-        <Col xs={24} md={8} style={{ textAlign: 'center', margin: '16px 0' }}>
-          <Space split={<Divider type="vertical" style={{ borderColor: '#4B5563' }} />}>
-            <Link to="/privacy-policy" style={{ color: '#9CA3AF', hover: { color: 'white' } }}>
-              Privacy Policy
-            </Link>
-            <Link to="/terms" style={{ color: '#9CA3AF', hover: { color: 'white' } }}>
-              Terms of Service
-            </Link>
-            <Link to="/contact" style={{ color: '#9CA3AF', hover: { color: 'white' } }}>
-              Contact
-            </Link>
-          </Space>
-        </Col>
-        
-        <Col xs={24} md={8} style={{ textAlign: 'right' }}>
-          <Space size="middle">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-              <GithubOutlined style={{ fontSize: '20px', color: '#9CA3AF' }} />
-            </a>
+    <footer className="bg-gray-900 text-gray-400 py-8">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center space-y-6 md:space-y-0">
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-semibold text-white mb-2">Civic Portal</h4>
+          </div>
+          <div className="flex flex-wrap justify-center space-x-6 text-sm">
+            <Link to="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
+            <Link to="/terms-of-service" className="hover:text-white transition">Terms of Service</Link>
+            <Link to="/contact" className="hover:text-white transition">Contact</Link>
+          </div>
+          <div className="flex justify-center space-x-6">
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <TwitterOutlined style={{ fontSize: '20px', color: '#9CA3AF' }} />
+              <TwitterOutlined className="text-2xl hover:text-white transition" />
             </a>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-              <LinkedinOutlined style={{ fontSize: '20px', color: '#9CA3AF' }} />
+              <LinkedinOutlined className="text-2xl hover:text-white transition" />
             </a>
             <a href="mailto:contact@example.com">
-              <MailOutlined style={{ fontSize: '20px', color: '#9CA3AF' }} />
+              <MailOutlined className="text-2xl hover:text-white transition" />
             </a>
-          </Space>
-        </Col>
-      </Row>
-      
-      <Divider style={{ borderColor: '#4B5563', margin: '16px 0' }} />
-      
-      <Row justify="center">
-        <Col>
-          <Text style={{ color: '#9CA3AF' }}>
-            &copy; {currentYear} PollSystem. All rights reserved.
-          </Text>
-        </Col>
-      </Row>
-      
-      <Row justify="center" style={{ marginTop: '8px' }}>
-        <Col>
-          <Text style={{ color: '#6B7280', fontSize: '12px' }}>
-            Made with <HeartOutlined style={{ color: '#EF4444' }} /> by Your Company
-          </Text>
-        </Col>
-      </Row>
-    </AntFooter>
+          </div>
+        </div>
+        <hr className="border-gray-700 my-6" />
+        <div className="text-center text-sm">
+          <p>&copy; {currentYear} Civic Portal. All rights reserved.</p>
+          <p className="mt-2 text-xs text-gray-500">
+            Made by <span className="text-white">Civic Portal</span>
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 };
 

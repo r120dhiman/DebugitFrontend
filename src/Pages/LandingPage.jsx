@@ -37,7 +37,7 @@ function LandingPage() {
     const fetchReports = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://debugitbackend.onrender.com/reports/allreports');
+        const response = await axios.get('http://localhost:3001/reports/allreports');
         setAllReports(response.data);
         setLoading(false);
       } catch (error) {
@@ -54,7 +54,6 @@ function LandingPage() {
     setShowWelcome(false);
   };
 
-  // Function to determine status tag color
   const getStatusColor = (status) => {
     const statusMap = {
       'pending': 'orange',
@@ -70,7 +69,6 @@ function LandingPage() {
       <Content className="site-layout" style={{ padding: '0 50px', minHeight: '90vh' }}>
         <div style={{ background: '#fff', padding: 24, minHeight: 380, borderRadius: 4, marginTop: 20 }}>
           
-          {/* Welcome Banner */}
           {loginData && showWelcome && (
             <Alert
               message={
@@ -89,7 +87,6 @@ function LandingPage() {
             />
           )}
 
-          {/* Reports Section */}
           <div style={{ textAlign: 'center', marginBottom: 24 }}>
             <Space align="center">
               <FlagOutlined style={{ fontSize: 24 }} />
@@ -102,7 +99,6 @@ function LandingPage() {
             </Paragraph>
           </div>
 
-          {/* Error State */}
           {error && (
             <Alert
               message="Error"
@@ -113,7 +109,6 @@ function LandingPage() {
             />
           )}
 
-          {/* Loading State */}
           {loading ? (
             <div>
               {[1, 2, 3].map((item) => (
@@ -124,14 +119,12 @@ function LandingPage() {
             </div>
           ) : (
             <>
-              {/* Empty State */}
               {allReports.length === 0 ? (
                 <Empty
                   description="No reports found"
                   image={Empty.PRESENTED_IMAGE_SIMPLE}
                 />
               ) : (
-                /* Reports List */
                 <List
                   itemLayout="vertical"
                   size="large"
@@ -176,12 +169,6 @@ function LandingPage() {
                           </Tag>
                         </div>
                       )}
-                      
-                      <div style={{ marginTop: 16, textAlign: 'right' }}>
-                        <Button type="primary" size="small" href={`/report/${report.id}`}>
-                          View Details
-                        </Button>
-                      </div>
                     </List.Item>
                   )}
                 />

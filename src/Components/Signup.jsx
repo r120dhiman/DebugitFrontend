@@ -12,7 +12,7 @@ function Signup() {
   const handleSignup = (values) => {
     const { first_name, last_name, email, password } = values;
     
-    axios.post('https://debugitbackend.onrender.com/user/signup', {
+    axios.post('http://localhost:3001/user/signup', {
       first_name,
       last_name,
       email,

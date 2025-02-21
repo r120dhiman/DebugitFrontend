@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../Api/Context.jsx";
 import { Layout, Menu, Button, Avatar } from "antd";
@@ -9,9 +9,40 @@ import {
   UserAddOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
-
+import gsap from "gsap";
 const Navbar = () => {
+  let tl = gsap.timeline();
+  useEffect(() => {
+    tl.fromTo(
+      ".navoption",
+      {
+        x: -10,
+        y: -20,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.2,
+      }
+    );
+  }, []);
+  const handlehover = (event) => {
+    gsap.to(event.currentTarget, {
+      borderBottomWidth: 2,
+      duration: 0.3,
+      borderBottomColor: "white",
+    });
+  };
+  const handleout = (event) => {
+    gsap.to(event.currentTarget, {
+      borderBottomWidth: 0,
+    });
+  };
   const { loginData, logout } = useUser();
+  console.log(loginData);
   const navigate = useNavigate();
   const [current, setCurrent] = useState("home");
 
@@ -25,23 +56,62 @@ const Navbar = () => {
   };
 
   return (
-    <Layout.Header className="p-0 sticky top-0 z-[1] w-full bg-[#001529]">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center w-full">
+    <Layout.Header className=" p-0 sticky top-0 z-[1] w-full  h-20  bg-[#001529]">
+        <div className="flex justify-between items-center h-12 pt-2 ">
+          <div className="flex items-center w-full ">
             <Link to="/">
               <h1 className="text-white text-xl font-bold w-40 m-0">
                 Civic Portal
               </h1>
             </Link>
 
-            <div className="flex w-full flex-row gap-20">
-              <Link to="/" className="text-white hover:text-2xl">Home</Link>
-              <Link to="/vote" className="text-white hover:text-2xl">Vote</Link>
+            <div className="flex w-full flex-row gap-20 h-full ">
+              <Link
+                to="/"
+                onMouseEnter={(e) => {
+                  handlehover(e);
+                }}
+                onMouseOut={(e) => {
+                  handleout(e);
+                }}
+                className={`navoption text-white h-fit px-3 `}
+              >
+                Home
+              </Link>
+              <Link to="/vote"  onMouseEnter={(e) => {
+                  handlehover(e);
+                }}
+                onMouseOut={(e) => {
+                  handleout(e);
+                }} className="navoption text-white px-3 ">
+                Vote
+              </Link>
               {loginData && (
                 <>
-                  <Link to="/report" className="text-white hover:text-2xl">Report</Link>
-                  <Link to="/newpoll" className="text-white hover:text-2xl">Create Poll</Link>
+                  <Link
+                   onMouseEnter={(e) => {
+                    handlehover(e);
+                  }}
+                  onMouseOut={(e) => {
+                    handleout(e);
+                  }}
+                    to="/report"
+                    className="navoption text-white px-3 "
+                  >
+                    Report
+                  </Link>
+                  <Link
+                   onMouseEnter={(e) => {
+                    handlehover(e);
+                  }}
+                  onMouseOut={(e) => {
+                    handleout(e);
+                  }}
+                    to="/newpoll"
+                    className="navoption text-white px-3 "
+                  >
+                    Create Poll
+                  </Link>
                 </>
               )}
             </div>
@@ -56,27 +126,22 @@ const Navbar = () => {
             >
               {loginData && (
                 <>
-                  <Menu.Item
-                    key="logout"
-                    icon={<LogoutOutlined />}
-                    danger
-                    onClick={handleLogout}
-                  >
+                 <span onClick={handleLogout} className="navoption px-5 text-white text-lg">
                     Logout
-                  </Menu.Item>
+                  </span>
                 </>
               )}
             </Menu>
 
             {loginData ? (
               <div className="flex items-center space-x-3">
+                <Link to="/profile" className="flex flex-row justify-center items-center gap-3">
                 <Avatar icon={<UserOutlined />} />
-                <Link to='/profile'>
-                <span className="text-white text-sm">
-                  {loginData.first_name || "User"}
-                </span>
+                
+                  <span className="navoption text-white text-sm">
+                    {loginData.first_name || "User"}
+                  </span>
                 </Link>
-               
               </div>
             ) : (
               <>
@@ -104,7 +169,6 @@ const Navbar = () => {
             />
           </div>
         </div>
-      </div>
     </Layout.Header>
   );
 };

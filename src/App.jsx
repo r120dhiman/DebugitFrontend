@@ -11,6 +11,7 @@ import NewPoll from './Pages/NewPoll'
 import Vote from './Pages/Vote'
 import Report from './Pages/Report'
 import Privacy from './Pages/Privacy'
+import ContactUs from './Pages/Contactus'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/contact" element={<ContactUs/>} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/vote" element={<Vote />} />
         <Route path="/privacy-policy" element={<Privacy/>}/>

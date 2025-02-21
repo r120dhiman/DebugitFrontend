@@ -3,13 +3,13 @@ import React from 'react'
 function Privacy() {
   return (
     <div>
-      <h1 className="text-5xl">Privacy Policy</h1>
-      <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
+      <h1 className="text-5xl mx-auto text-[#5c6161] w-fit font-extrabold py-3">Privacy Policy</h1>
+      <div className="w-[80vw] mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
         <h1 className="text-3xl font-semibold text-center text-gray-800"><strong>Privacy Policy for Civic Governance Platform</strong></h1>
-        <p className="text-gray-600">Effective Date: <strong>[Insert Date]</strong></p>
+        <p className="text-gray-600">Last Updated: <strong>{new Date().toISOString().split('T')[0]}</strong></p>
 
         <p className="text-gray-700">
-          At <strong>[Project Name]</strong>, we prioritize the privacy and security of your personal data. This Privacy Policy explains the types of data we collect, how we use and protect your information, and how we ensure that your activities on the platform remain private and confidential.
+          At <strong>Civic Portal</strong>, we prioritize the privacy and security of your personal data. This Privacy Policy explains the types of data we collect, how we use and protect your information, and how we ensure that your activities on the platform remain private and confidential.
         </p>
 
         <p className="text-gray-700">
@@ -119,8 +119,8 @@ function Privacy() {
             If you have any questions or concerns, please contact us at:
           </p>
           <ul className="space-y-1 text-gray-700">
-            <li>Email: <a href="mailto:[Insert Contact Email]" className="text-blue-500">[Insert Contact Email]</a></li>
-            <li>Address: [Insert Company Address]</li>
+            <li>Email: <a href="mailto:r120dhiman+debugit@gmail.com" className="text-blue-500">r120dhiman+debugit@gmail.com</a></li>
+            <li>Address: Civic Portal, IIT BHU</li>
           </ul>
         </section>
       </div>
