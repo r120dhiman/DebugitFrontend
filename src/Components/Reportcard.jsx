@@ -6,8 +6,9 @@ import axios from 'axios';
 import { useUser } from '../Api/Context';
 
 const { TextArea } = Input;
-
+const API_URL="https://debugitbackend.onrender.com";
 function Reportcard({ onSubmitSuccess }) {
+
     const { loginData } = useUser();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [form] = Form.useForm();
@@ -20,7 +21,7 @@ function Reportcard({ onSubmitSuccess }) {
 
         setIsSubmitting(true);
         try {
-            const response = await axios.post('https://debugitbackend.onrender.com/reports/newreport', {
+            const response = await axios.post(`${API_URL}/reports/newreport`, {
                 title: values.title,
                 description: values.description,
                 userid: loginData.id

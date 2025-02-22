@@ -3,7 +3,7 @@ import { Form, Input, Button, Card, message } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+const API_URL="https://debugitbackend.onrender.com";
 function Signup() {
   const navigate = useNavigate();
   const [signupResponse, setSignupResponse] = useState(null);
@@ -12,7 +12,7 @@ function Signup() {
   const handleSignup = (values) => {
     const { first_name, last_name, email, password } = values;
     
-    axios.post('https://debugitbackend.onrender.com/user/signup', {
+    axios.post(`${API_URL}/user/signup`, {
       first_name,
       last_name,
       email,
@@ -28,9 +28,9 @@ function Signup() {
       message.error('Signup failed. Please try again.');
     });
   };
-
+  
   return (
-    <div className=' mx-auto my-auto px-0 py-5 flex justify-center bg-[#F8F8FF] w-screen' >
+    <div className=' mx-auto min-h-[80vh] my-auto px-0 py-5 flex justify-center bg-[#F8F8FF] w-screen' >
       <Card title="Sign Up" className='min-w-96 max-w-full  mx-auto' >
         <Form
           form={form}

@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import { useUser } from '../Api/Context';
 
+const API_URL="https://debugitbackend.onrender.com";
 const Poll = () => {
+  
+  const [SuccessMessage, setSuccessMessage] = useState('')
+  const {loginData}=useUser();
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState([{ optionText: '', votes: 0 }]);
   const [loading, setLoading] = useState(false);
@@ -30,9 +35,9 @@ const Poll = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+    
     try {
-      const response = await fetch('https://debugitbackend.onrender.com/poll/create', {
+      const response = await fetch(`${API_URL}/poll/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,6 +45,8 @@ const Poll = () => {
         body: JSON.stringify({
           question,
           options,
+          createdBy:loginData.id
+          
         }),
       });
       
@@ -48,7 +55,7 @@ const Poll = () => {
       }
       
       const data = await response.json();
-      console.log('Poll created successfully:', data);
+      setSuccessMessage('Poll created successfully!');
       setLoading(false);
     } catch (error) {
       setError('There was an error creating the poll.');
@@ -57,7 +64,12 @@ const Poll = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className="min-h-[80vh] py-12 px-4">
+      {SuccessMessage && (
+    <div className="p-4 mb-4 text-green-500 bg-green-50 rounded-xl border border-green-200">
+        {SuccessMessage}
+    </div>
+)}
       <div className="max-w-3xl mx-auto bg-blue-50/80 backdrop-blur-sm rounded-2xl shadow-xl">
         <div className="p-8">
           <form onSubmit={handleSubmit} className="space-y-8">

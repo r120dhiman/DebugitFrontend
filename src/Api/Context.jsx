@@ -1,13 +1,13 @@
-
-
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const UserContext = createContext();
+const API_URL = "https://debugitbackend.onrender.com";
 
 export const UserProvider = ({ children }) => {
     const [loginData, setLoginData] = useState(null);
     const [token, setToken] = useState(null);
+
     useEffect(() => {
         const savedToken = localStorage.getItem("authToken");
         const savedUserData = localStorage.getItem("userData");
@@ -21,7 +21,8 @@ export const UserProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post("https://debugitbackend.onrender.com/user/login", { email, password });
+            const response = await axios.post(`${API_URL}/user/login`, { email, password });
+            
             if (response.data.token) {
                 const newToken = response.data.token;
                 const userData = response.data.userdetails;
@@ -32,7 +33,8 @@ export const UserProvider = ({ children }) => {
                 axios.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
             }
         } catch (error) {
-            console.error("Login Error:", error.response?.data || error.message);
+            console.error("Login Error:", error.response?.data?.message || error.message);
+            throw new Error(error.response?.data?.message || "Login failed. Please check email and password and try agaiin");
         }
     };
 

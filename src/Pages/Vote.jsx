@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../Api/Context';
 import { useNavigate } from 'react-router-dom';
-
+const API_URL="https://debugitbackend.onrender.com";
 const Vote = () => {
   const { loginData } = useUser();
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const Vote = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('https://debugitbackend.onrender.com/poll/allpolls')
+    fetch(`${API_URL}/poll/allpolls`)
       .then((response) => response.json())
       .then((data) => {
         setAllPolls(data);
@@ -37,7 +37,7 @@ const Vote = () => {
     }
 
     try {
-      const response = await fetch('https://debugitbackend.onrender.com/vote/newvote', {
+      const response = await fetch(`${API_URL}/vote/newvote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

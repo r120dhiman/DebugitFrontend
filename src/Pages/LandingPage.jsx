@@ -22,7 +22,7 @@ import {
   ExclamationCircleOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
-
+const API_URL="https://debugitbackend.onrender.com";
 const { Content } = Layout;
 const { Title, Text, Paragraph } = Typography;
 
@@ -37,8 +37,9 @@ function LandingPage() {
     const fetchReports = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://debugitbackend.onrender.com/reports/allreports');
+        const response = await axios.get(`${API_URL}/reports/allreports`);
         setAllReports(response.data);
+        console.log("Fetching data");
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch reports:", error);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../Api/Context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const API_URL="https://debugitbackend.onrender.com";
 function Profile() {
   const [UserPolls, setUserPolls] = useState([]);
   const [UserReports, setUserReports] = useState([]);
@@ -17,7 +17,7 @@ function Profile() {
     
     const userid = loginData.id;
     axios
-      .get("https://debugitbackend.onrender.com/reports/userreports", { 
+      .get(`${API_URL}/reports/userreports`, { 
         params: { userid } 
       })
       .then((response) => {
@@ -26,7 +26,7 @@ function Profile() {
       .catch((error) => console.error("Error fetching reports:", error));
     
     axios
-      .get("https://debugitbackend.onrender.com/poll/userpolls", { 
+      .get(`${API_URL}/poll/userpolls`, { 
         params: { userid }  
       })
       .then((response) => {
@@ -36,7 +36,7 @@ function Profile() {
   }, [loginData, navigate]);  
   
   return (
-    <div className="p-4">
+    <div className="p-4 min-h-[80vh]">
       <h1 className="text-2xl font-bold">Welcome to Your Profile</h1>
       <div className="my-4 bg-gray-100 p-4 rounded shadow">
         <h2 className="text-xl font-semibold">Name</h2>
