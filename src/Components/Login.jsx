@@ -77,9 +77,6 @@ function Login() {
                             >
                                 Log in
                             </Button>
-                            <Typography.Text className='block text-center'>
-                                <Link to="/forget-password">Reset Your Password</Link>
-                            </Typography.Text>
                         </Space>
                     </Form.Item>
                 </Form>
