@@ -27,7 +27,6 @@ function Login() {
             setLoading(false);
         }
     };
-
     return (
         <div className='flex justify-center py-5 items-center min-h-[80vh]'>
             <Card className='w-96 drop-shadow-2xl'
