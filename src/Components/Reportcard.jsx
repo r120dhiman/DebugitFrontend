@@ -33,7 +33,7 @@ function Reportcard({ onSubmitSuccess }) {
             if (onSubmitSuccess) {
                 setTimeout(() => {
                     onSubmitSuccess();
-                }, 1500); // Give time for success message to be seen
+                }, 1500);
             }
         } catch (error) {
             console.error('Report submission error:', error);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../Api/Context.jsx";
-import { Layout, Menu, Button, Avatar } from "antd";
+import { Layout, Button, Avatar } from "antd";
 import {
   UserOutlined,
   LoginOutlined,
@@ -23,12 +23,9 @@ const Navbar = () => {
   return (
     <Layout.Header className="p-0 sticky top-0 z-50 w-full bg-[#001529]">
       <div className="flex justify-between items-center h-16 px-4">
-        {/* Logo */}
         <Link to="/">
           <h1 className="text-white text-xl font-bold m-0">Civic Portal</h1>
         </Link>
-
-        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-6">
           <Link to="/" className="text-white px-3">Home</Link>
           <Link to="/vote" className="text-white px-3">Give Your Opinion</Link>
@@ -39,8 +36,6 @@ const Navbar = () => {
             </>
           )}
         </div>
-
-        {/* Auth Buttons - Desktop */}
         <div className="hidden md:flex items-center space-x-4">
           {loginData ? (
             <div className="flex items-center space-x-4">
@@ -78,8 +73,6 @@ const Navbar = () => {
             </>
           )}
         </div>
-
-        {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           <Button
             type="text"
@@ -89,8 +82,6 @@ const Navbar = () => {
           />
         </div>
       </div>
-
-      {/* Mobile Menu */}
       {mobileMenuVisible && (
         <div className="md:hidden bg-[#001529] py-4 px-4 space-y-3">
           <Link to="/" className="block text-white py-2" onClick={() => setMobileMenuVisible(false)}>Home</Link>

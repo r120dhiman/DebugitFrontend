@@ -10,21 +10,17 @@ import {
   Empty, 
   Skeleton, 
   Tag, 
-  Button, 
   Space,
-  Avatar,
-  Divider
+  Avatar
 } from 'antd';
 import { 
-  CloseOutlined, 
   FlagOutlined, 
-  UserOutlined,
   ExclamationCircleOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
 const API_URL="https://debugitbackend.onrender.com";
 const { Content } = Layout;
-const { Title, Text, Paragraph } = Typography;
+const { Title,  Paragraph } = Typography;
 
 function LandingPage() {
   const { loginData } = useUser();
@@ -68,13 +64,13 @@ function LandingPage() {
   return (
     <Layout>
       <Content className="site-layout" style={{ padding: '0 50px', minHeight: '90vh' }}>
-        <div style={{ background: '#fff', padding: 24, minHeight: 380, borderRadius: 4, marginTop: 20 }}>
+        <div className="bg-[#ffffff] p-6 min-h-96 rounded-lg mt-5" >
           
           {loginData && showWelcome && (
             <Alert
               message={
                 <Space>
-                  <Title level={4} style={{ margin: 0 }}>
+                  <Title level={4} className="m-0" >
                     Welcome Back, {loginData.first_name} {loginData.last_name}!
                   </Title>
                 </Space>
@@ -83,19 +79,19 @@ function LandingPage() {
               showIcon
               closable
               onClose={handleClose}
-              style={{ marginBottom: 24 }}
+              className="mb-6"
               banner
             />
           )}
 
-          <div style={{ textAlign: 'center', marginBottom: 24 }}>
+          <div className="text-center mb-6" >
             <Space align="center">
-              <FlagOutlined style={{ fontSize: 24 }} />
-              <Title level={2} style={{ margin: 0 }}>
+              <FlagOutlined className="text-2xl" />
+              <Title level={2} className="m-0" >
                 Recent Reports
               </Title>
             </Space>
-            <Paragraph type="secondary" style={{ marginTop: 8 }}>
+            <Paragraph type="secondary" className="mt-2">
               View and track the latest reported issues in the system
             </Paragraph>
           </div>
@@ -106,14 +102,14 @@ function LandingPage() {
               description={error}
               type="error"
               showIcon
-              style={{ marginBottom: 24 }}
+              className="mb-6"
             />
           )}
 
           {loading ? (
             <div>
               {[1, 2, 3].map((item) => (
-                <Card key={item} style={{ marginBottom: 16 }}>
+                <Card key={item} className="mb-4">
                   <Skeleton active avatar paragraph={{ rows: 3 }} />
                 </Card>
               ))}
@@ -134,7 +130,7 @@ function LandingPage() {
                     <List.Item
                       key={report.id || index}
                       extra={
-                        <div style={{ textAlign: 'right' }}>
+                        <div className="text-right" >
                           <Tag color={getStatusColor(report.status)}>
                             {report.status || 'Pending'}
                           </Tag>
@@ -142,18 +138,18 @@ function LandingPage() {
                       }
                     >
                       <List.Item.Meta
-                        avatar={<Avatar icon={<ExclamationCircleOutlined />} style={{ backgroundColor: '#1890ff' }} />}
+                        avatar={<Avatar icon={<ExclamationCircleOutlined />} className="bg-[#1575d0]"  />}
                         title={<a href={`/report/${report.id}`}>{report.title}</a>}
                       />
                       <Paragraph
                         ellipsis={{ rows: 2, expandable: true, symbol: 'more' }}
-                        style={{ marginBottom: 16 }}
+                        className="mb-4"
                       >
                         {report.description}
                       </Paragraph>
                       
                       {report.resolved && (
-                        <div style={{ marginTop: 12 }}>
+                        <div className="mt-3" >
                           <Tag icon={<CheckCircleOutlined />} color="success">
                             Resolved
                           </Tag>
