@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../Api/Context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const API_URL="http://localhost:3001";
+const API_URL="https://debugitbackend.onrender.com";
 function Profile() {
   const [UserPolls, setUserPolls] = useState([]);
   const [UserReports, setUserReports] = useState([]);

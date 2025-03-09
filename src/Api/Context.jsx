@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
 const UserContext = createContext();
-const API_URL = "http://localhost:3001";
+const API_URL = "https://debugitbackend.onrender.com";
 
 export const UserProvider = ({ children }) => {
     const [loginData, setLoginData] = useState(null);
