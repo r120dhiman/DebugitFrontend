@@ -18,7 +18,7 @@ import {
   ExclamationCircleOutlined,
   CheckCircleOutlined
 } from '@ant-design/icons';
-const API_URL="https://debugitbackend.onrender.com";
+const API_URL="http://localhost:3001";
 const { Content } = Layout;
 const { Title,  Paragraph } = Typography;
 
@@ -163,6 +163,7 @@ function LandingPage() {
           )}
         </div>
       </Content>
+      
     </Layout>
   );
 }

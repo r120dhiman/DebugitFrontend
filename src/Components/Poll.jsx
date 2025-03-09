@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useUser } from '../Api/Context';
 
-const API_URL="https://debugitbackend.onrender.com";
+const API_URL="http://localhost:3001";
 const Poll = () => {
   
   const [SuccessMessage, setSuccessMessage] = useState('')
   const {loginData}=useUser();
+  const userid=(loginData.id);
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState([{ optionText: '', votes: 0 }]);
   const [loading, setLoading] = useState(false);
@@ -45,9 +46,9 @@ const Poll = () => {
         body: JSON.stringify({
           question,
           options,
-          createdBy:loginData.id
-          
-        }),
+          createdBy:userid  
+        })
+        ,
       });
       
       if (!response.ok) {

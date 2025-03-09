@@ -3,7 +3,7 @@ import { Form, Input, Button, Card, message } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const API_URL="https://debugitbackend.onrender.com";
+const API_URL="http://localhost:3001";
 function Signup() {
   const navigate = useNavigate();
   const [signupResponse, setSignupResponse] = useState(null);
